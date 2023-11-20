@@ -14,41 +14,53 @@ export default function ImageUploadForm() {
   }
 
   // Form Submission Function
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
     if (!imageFile) {
       alert('Please choose an image file to upload!');
       return;
     }
 
-    // If successful, navigate to captiondisplay page
-    navigate('/caption-page', {
-      replace: true,
-      state: {
-        imageFile: imageFile,
-        caption: "This is a dummy caption."
-      }
-    });
+    try{
+      const caption = await fetchCaption();
+      // If successful, navigate to captiondisplay page
+      navigate('/caption-page', {
+        replace: true,
+        state: {
+          imageFile: imageFile,
+          caption: caption
+        }
+      });
   }
-
-  // Set up form data as an image file before POSTing
-  const formData = new FormData();
-  formData.append('image', imageFile)
+  catch(error){
+    console.error(error);
+    alert('Failed to fetch caption.');
+  }
+}
 
   // async image upload function
-  async function uploadImageFile() {
+  async function fetchCaption() {
     try {
-      // Comment out api call until backend is implemented
-      //const response = await axios.post('http://backend-todo/image-api/upload', formData, {
-      //  headers: { 'Content-Type': 'multipart/form-data' }
-      // });
-      // console.log(response.data);
+      // Set up form data as an image file before POSTing
+      const formData = new FormData();
+      formData.append('image', imageFile)
+
+      const response = await axios.post('http://localhost:5000/api/caption', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+       });
+       console.log(response.data);
+
+       if (response.data && response.data.caption){
+        return response.data.caption
+       } else {
+        throw new Error('Caption not received.');
+       }
     }
-    catch (error) { console.error(error) }
+    catch (error) {
+       console.error('Error fetching caption.', error);
+       throw error;
+      }
   }
-
-  uploadImageFile(); // Call function to upload file
-
 
   return (
     <form onSubmit={handleFormSubmit}>

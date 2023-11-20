@@ -2,7 +2,7 @@ const vision = require('@google-cloud/vision');
 
 // Creates a client using credentials from a JSON key file
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: 'path/to/your/google-credentials.json'
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
 });
 
 exports.generateCaption = async (image) => {
