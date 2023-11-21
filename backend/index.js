@@ -1,7 +1,8 @@
+require('dotenv').config();
+console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS); // For debugging
 const express = require('express');
 const app = require('./app'); // import app from app.js
 
-require('dotenv').config();
 
 // ... other middleware or routes ...
 

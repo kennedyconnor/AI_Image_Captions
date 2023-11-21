@@ -1,12 +1,12 @@
 const vision = require('@google-cloud/vision');
 
 // Creates a client using credentials from a JSON key file
-const client = new vision.ImageAnnotatorClient({
-  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS
-});
+const client = new vision.ImageAnnotatorClient();
 
 exports.generateCaption = async (image) => {
   try {
+    // make sure credentials are correct
+    console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
     // Assuming 'image' is a base64-encoded image string
     const [result] = await client.labelDetection({ image: { content: image } });
     const labels = result.labelAnnotations;
