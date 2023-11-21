@@ -3,4 +3,5 @@
 /backend/node_modules
 /venv
 /backend/ai-image-generation-405112-6fa300e2969b.json
+/uploads
 .env

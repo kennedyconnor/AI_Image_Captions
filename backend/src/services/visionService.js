@@ -10,7 +10,6 @@ exports.generateCaption = async (filePath) => {
      // Convert the buffer to a base64 string
      const base64Image = fileBuffer.toString('base64');
  
-    console.log("encoded file:", base64Image)
     const [result] = await client.labelDetection({ image: { content: base64Image } });
 
     const labels = result.labelAnnotations;
