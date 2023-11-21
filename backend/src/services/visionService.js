@@ -8,7 +8,10 @@ exports.generateCaption = async (image) => {
     // make sure credentials are correct
     console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
     // Assuming 'image' is a base64-encoded image string
-    const [result] = await client.labelDetection({ image: { content: image } });
+    var encoded = Buffer.from(image).toString('base64');
+    console.log("encoded file:", encoded)
+    const [result] = await client.labelDetection({ image: { content: encoded } });
+
     const labels = result.labelAnnotations;
 
     // Extract descriptions from the labels
