@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const captionRoutes = require('./routes/captionRoutes');
+const captionRoutes = require('./src/api/routes/captionRoutes');
 
 const app = express();
 

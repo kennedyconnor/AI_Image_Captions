@@ -1,4 +1,4 @@
-const visionService = require('../services/visionService');
+const visionService = require('../../services/visionService');
 
 exports.getCaption = async (req, res) => {
   try {
