@@ -6,6 +6,7 @@ import '../styles/ImageUploadForm.css';
 export default function ImageUploadForm() {
   //Set State
   const [imageFile, setImageFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   // Function for handling file changes
@@ -21,7 +22,9 @@ export default function ImageUploadForm() {
       return;
     }
 
-    try{
+    setIsLoading(true); // display loading message for user
+
+    try {
       const caption = await fetchCaption();
       // If successful, navigate to captiondisplay page
       navigate('/caption-page', {
@@ -36,6 +39,9 @@ export default function ImageUploadForm() {
     console.error(error);
     alert('Failed to fetch caption.');
   }
+  finally {
+    setIsLoading(false); // set loading to false when done
+  }
 }
 
   // async image upload function
@@ -46,7 +52,7 @@ export default function ImageUploadForm() {
       formData.append('image', imageFile)
 
       const response = await axios.post('http://localhost:5000/api/caption', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+       // headers: { 'Content-Type': 'multipart/form-data'}
        });
        console.log(response.data);
 
@@ -66,6 +72,7 @@ export default function ImageUploadForm() {
     <form onSubmit={handleFormSubmit}>
       <input type="file" onChange={handleFileChange} />
       <button type="submit">Upload Image</button>
+      {isLoading && <p>Generating Caption...</p>} 
     </form>
   );
 };
