@@ -36,4 +36,4 @@ Store this string in response.data.caption and use it any way you'd like!
 ```
 
 ### UML Diagram
-![](../../../../Desktop/UML.png)
+![](/UML.png)
