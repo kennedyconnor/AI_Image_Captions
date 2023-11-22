@@ -1,5 +1,6 @@
 # AI_Image_Captions
 
+## Communication Contract
 ## Caption Microservice / Backend 
 This microservice receives an image file through an HTTP API call and will return a response body with a text list of descriptive captions for the image sent.
 
