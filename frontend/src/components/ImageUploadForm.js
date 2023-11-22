@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ImageUploadForm.css';
 
+
+
 export default function ImageUploadForm() {
   //Set State
   const [imageFile, setImageFile] = useState(null);
@@ -55,7 +57,7 @@ export default function ImageUploadForm() {
         console.log(`${key}: ${value}`);
       }
 
-      const response = await axios.post('http://localhost:5000/api/caption', formData, {
+      const response = await axios.post(`https://ai-image-generation-405112.uk.r.appspot.com/api/caption`, formData, {
        // headers: { 'Content-Type': 'multipart/form-data'}
        });
        console.log(response.data);
