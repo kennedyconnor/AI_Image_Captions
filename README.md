@@ -29,6 +29,7 @@ stored under the pathing response.data.caption, as seen in the above example cal
 
 Store this string in response.data.caption and use it any way you'd like!
 ```json
-    data: 
+    data: {
         caption: "Plant, Deer, Natural landscape, Grass, Fawn, Terrestrial animal, Grassland, Tree, Meadow, Snout"
+    }
 ```
