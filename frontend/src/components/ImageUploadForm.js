@@ -57,6 +57,7 @@ export default function ImageUploadForm() {
        });
 
        if (response.data && response.data.caption){
+        console.log(response)
         return response.data.caption
        } else {
         throw new Error('Caption not received.');

@@ -28,3 +28,7 @@ The data will be returned in the response body of the POST request,
 stored under the pathing response.data.caption, as seen in the above example call. It is a string, a comma seperated list of all descriptors of the image that have been generated. 
 
 Store this string in response.data.caption and use it any way you'd like!
+```json
+    data: 
+        caption: "Plant, Deer, Natural landscape, Grass, Fawn, Terrestrial animal, Grassland, Tree, Meadow, Snout"
+```
