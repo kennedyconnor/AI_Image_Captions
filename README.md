@@ -1,7 +1,7 @@
 # AI_Image_Captions
 
-## Communication Contract
-## Caption Microservice / Backend 
+
+## Communication Contract: Caption Microservice / Backend 
 This microservice receives an image file through an HTTP API call and will return a response body with a text list of descriptive captions for the image sent.
 
 ### How to REQUEST information
@@ -34,3 +34,6 @@ Store this string in response.data.caption and use it any way you'd like!
         caption: "Plant, Deer, Natural landscape, Grass, Fawn, Terrestrial animal, Grassland, Tree, Meadow, Snout"
     }
 ```
+
+### UML Diagram
+![](../../../../Desktop/UML.png)
