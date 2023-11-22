@@ -52,15 +52,9 @@ export default function ImageUploadForm() {
       // Set up form data as an image file before POSTing
       const formData = new FormData();
       formData.append('image', imageFile)
-      console.log("Data being sent to API: ")
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
-
       const response = await axios.post(`https://ai-image-generation-405112.uk.r.appspot.com/api/caption`, formData, {
        // headers: { 'Content-Type': 'multipart/form-data'}
        });
-       console.log(response.data);
 
        if (response.data && response.data.caption){
         return response.data.caption
