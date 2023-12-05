@@ -6,7 +6,7 @@ import ImageCaption from '../components/ImageCaption'
 function CaptionDisplay() {
   const location = useLocation();
   const [imageSrc, setImageSrc] = React.useState('');
-  const { imageFile, caption } = location.state || {};
+  const { imageFile, caption, imageStats } = location.state || {};
 
   // Remember to revoke the object URL to release memory when the component unmounts
   React.useEffect(() => {
@@ -26,7 +26,8 @@ function CaptionDisplay() {
       {imageSrc ? (
         <div>
           <img src={imageSrc} alt="Uploaded" />
-          <p>Caption: {caption}</p> {/* Display the caption */}
+          <p><b>Caption: </b> {caption}</p> {/* Display the caption */}
+          <p><b>Stats: </b> {imageStats}</p>
         </div>
       ) : (
         <p>No image to display</p>

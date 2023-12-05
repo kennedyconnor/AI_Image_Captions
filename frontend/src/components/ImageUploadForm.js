@@ -8,7 +8,8 @@ export default function ImageUploadForm() {
   const [imageFile, setImageFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isValidImage, setIsValidImage] = useState(false);
-  const [imageImgurURL, setImageImgurURL] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
+  const [imageStats, setImageStats] = useState(null);
   const navigate = useNavigate();
 
   // Function for handling file changes
@@ -27,7 +28,7 @@ export default function ImageUploadForm() {
     setIsLoading(true); // display loading message for user
 
     try {
-      await validateImage()
+      const imageStats = await validateImage();
       const caption = await fetchCaption();
       // If successful, navigate to captiondisplay page
       navigate('/caption-page', {
@@ -35,7 +36,7 @@ export default function ImageUploadForm() {
         state: {
           imageFile: imageFile,
           caption: caption, 
-          imgurURL: imageImgurURL
+          imageStats: imageStats
         }
       });
   }
@@ -89,7 +90,7 @@ export default function ImageUploadForm() {
       const response = await fetch('https://api.imgur.com/3/image', requestOptions);
       const result = await response.json();
       if(result.data.link){
-        setImageImgurURL(result.data.link);
+        setImageURL(result.data.link);
       };
       return result.data.link; // URL of the uploaded image
     } catch (error) {
@@ -98,19 +99,77 @@ export default function ImageUploadForm() {
     }
   }
 
-  async function validateImage(){
-    const imgurURL = await uploadImageToImgur();    // upload to imgur for file reading
+  async function uploadImageToImgBB() {
+    const imgURL = await getBase64(imageFile);
+    const apiKey = 'd38edd269d59dd2227b6680f0025366a'; // Replace with your ImgBB API key
+
     try {
-      const imageStats = await axios.get(`http://localhost:4000/analyze-image?url=${imgurURL}`)
-      if(imageStats){
-        setIsValidImage(true)
-      }
-      return imageStats
+        const formData = new FormData();
+        formData.append('image', imgURL);
+        formData.set('key', apiKey)
+
+        const response = await axios({
+          method: 'post', 
+          url: 'https://api.imgbb.com/1/upload',
+          data: formData
+        });
+
+        const result = response.data;
+        console.log(result);
+
+        if (result.data.url) {
+            setImageURL(result.data.url);
+        };
+
+        return result.data.url;
+    } catch (error) {
+        console.error('Error uploading image to ImgBB:', error);
+        throw error;
+    }
+}
+
+
+  async function validateImage(){
+    // const imgurURL = await uploadImageToImgur();    // upload to imgur for file reading
+    // const imgURL = await uploadImageToImgur();
+    const formData = new FormData();
+    formData.append('image', imageFile)
+    try {
+      const response = await axios.post('http://localhost:4000/api/process-image', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        if(response.data){
+          setIsValidImage(true)
+        }
+        console.log('Partner Microservice Data:', response.data);
+        const imageString = Object.entries(response.data).map(([key, value]) => `${key}: ${value}`).join(', ');
+        setImageStats(imageString);
+        console.log("Formatted Partner Microservice Data: ", imageString)
+        return imageString;
     } catch(error){
       console.error('Error validating image with partner microservice');
       throw error;
     }
   }
+
+  // getBase64() is adapted from the discussion on https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
+  function getBase64(file) {  
+    return new Promise((resolve, reject) => {
+      if (!file) {
+          reject("No file provided");
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+          resolve(reader.result);
+      };
+      reader.onerror = error => {
+          reject(error);
+      };
+      reader.readAsDataURL(file);
+    });
+  } 
 
   return (
     <form onSubmit={handleFormSubmit}>
