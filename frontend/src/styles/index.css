@@ -1,13 +1,89 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+/* Reset some basic elements */
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Basic styling for the body */
+body {
+    font-family: 'Open Sans', sans-serif; /* Modern and clean font */
+    background-color: #f4f6f8; /* Soft gray background */
+    color: #424242; /* Slightly softer than black for text */
+    line-height: 1.6;
+}
+
+/* Ensures that the app fills the entire viewport */
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Default styling for all the containers in the app */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Global link styling */
+a {
+    color: #1a73e8; /* Bright blue for links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Basic button styling */
+button {
+    background-color: #1a73e8; /* Bright blue background for buttons */
+    color: #ffffff; /* White text for buttons */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Roboto', sans-serif; /* Roboto for a more geometric look on buttons */
+}
+
+button:hover {
+    background-color: #1565c0; /* Darker blue on hover */
+}
+
+/* Basic form input styling */
+input, select, textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; /* Lighter border for inputs */
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif; /* Consistent font for inputs */
+}
+
+/* Style for images to fit screen */
+img {
+  max-width: 50vw; /* Maximum width is 50% of the viewport width */
+  height: auto; /* Maintains aspect ratio */
+  border-radius: 4px; /* Softens the corners */
+}
+
+
+/* Style adjustments for small screens */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
 }

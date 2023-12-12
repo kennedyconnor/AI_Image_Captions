@@ -1,38 +1,87 @@
-.App {
+/* Basic styling for the body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9; /* Light off-white background */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Centering the content */
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  padding: 20px;
+  text-align: center; /* Center align text */
+}
+
+/* Header styling */
+.header {
+  background-color: #4a4e69; /* Dark blue header */
+  color: #f2e9e4; /* Light cream text */
   text-align: center;
+  padding: 15px 0;
+  border-radius: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Styling for the image upload form */
+.upload-form {
+  background-color: #f2e9e4; /* Light cream background */
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Style for form elements */
+.upload-form input[type="file"] {
+  margin-bottom: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.upload-form input[type="submit"] {
+  background-color: #9a8c98; /* Muted purple button */
+  color: #fff;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.upload-form input[type="submit"]:hover {
+  background-color: #4a4e69; /* Darker shade for hover */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* Styling for the image display section */
+.image-display {
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #f2e9e4; /* Light cream background */
+}
+
+/* Responsive Image */
+.image-display img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Footer styling */
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #4a4e69; /* Dark blue footer */
+  color: #f2e9e4; /* Light cream text */
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* Responsive design */
+@media only screen and (max-width: 600px) {
+  .container {
+      width: 95%;
   }
 }
